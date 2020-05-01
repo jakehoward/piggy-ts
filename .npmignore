@@ -1,5 +1,4 @@
 *
-!lib/index.d.ts
-!lib/index.js
+!lib/*
 !README.md
 !LICENSE

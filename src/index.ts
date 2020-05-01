@@ -54,9 +54,9 @@ export type PgConfig = {
     sqlPath?: string;
     migrations?: {
       path: string;
-      table?: string,
-      connection?: PoolConfig
-    }
+      table?: string;
+      connection?: PoolConfig;
+    };
   };
 };
 
@@ -106,7 +106,7 @@ export function initPg(config: PgConfig): Pg {
     client?: PoolClient,
   ): Promise<void> {
     const conn = client || (await pool.connect());
-    const copyQuery = pgFormat("COPY %I.%I FROM STDIN WITH NULL AS 'null'", schemaName, tableName);
+    const copyQuery = pgFormat("COPY %I.%I FROM STDIN WITH NULL AS ''", schemaName, tableName);
 
     debug(copyQuery);
     const stream = conn.query(from(copyQuery));
@@ -184,15 +184,14 @@ export function initPg(config: PgConfig): Pg {
         'Error running databaseMigrations, no path provided: ' +
         "You can't run migrations without providing the path to the migrations files when you initialize the module.";
       debug(errorMessage);
-      throw new Error()
+      throw new Error();
     }
-
 
     const marvConfig = {
       ...config.piggy.migrations,
       table: config.piggy.migrations.table || 'migrations',
       connection: config.piggy.migrations.connection || config.postgres, // default to same connection details
-      path: undefined // wipe out the path just in case it gets used by marv
+      path: undefined, // wipe out the path just in case it gets used by marv
     };
 
     const directory = path.resolve(path.join(process.cwd(), migrationsPath));

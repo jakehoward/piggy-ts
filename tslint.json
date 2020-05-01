@@ -5,7 +5,9 @@
   "rules": {
     "no-console": false,
     "interface-over-type-literal": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-shadowed-variable": false,
+    "no-var-requires": false
   },
   "rulesDirectory": []
 }

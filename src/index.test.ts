@@ -137,6 +137,7 @@ describe('Piggy', () => {
       ['James', 'Oinky'],
       ['Harold', 'Piggy'],
       ['Ben', 'Snout Face'],
+      ['_deleted', '']
     ]
       .map((ns) => ns.join('\t'))
       .join('\n');
@@ -150,6 +151,7 @@ describe('Piggy', () => {
       { name: 'James', nickname: 'Oinky' },
       { name: 'Harold', nickname: 'Piggy' },
       { name: 'Ben', nickname: 'Snout Face' },
+      { name: '_deleted', nickname: null },
     ]);
   });
 

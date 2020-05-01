@@ -8,10 +8,11 @@
     "publish": "npm test; npm run build",
     "verify-publish-contents": "npm pack",
     "test": "NODE_ENV=test jest --runInBand --testMatch='**/*.test.ts'",
-    "build": "node_modules/typescript/bin/tsc --build tsconfig.json",
+    "build": "tsc --build tsconfig.json",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts' --fix",
     "format": "node_modules/prettier/bin-prettier.js --write 'src/**/*.ts'",
-    "lint-format": "npm run lint && npm run format"
+    "lint-format": "npm run lint && npm run format",
+    "precommit": "npm run lint-format; npm run build; npm test"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,8 @@
     "jest": "^25.5.3",
     "prettier": "^2.0.5",
     "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.1",
+    "tslint": "^6.1.2",
     "typescript": "^3.8.3"
   },
   "dependencies": {

@@ -14,5 +14,5 @@ export function render(queryTemplate: string, params: { [key: string]: string | 
   }
   const keys = templateTokens.map((token: string) => token.split(':')[1]);
   const pgFormatTemplate = queryTemplate.replace(/(%[ILs]):[a-zA-Z]+/g, '$1');
-  return pgFormat(pgFormatTemplate, ...keys.map(k => params[k]));
+  return pgFormat(pgFormatTemplate, ...keys.map((k) => params[k]));
 }
