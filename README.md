@@ -294,7 +294,7 @@ await pg.withConnection(async (conn) => {
 
 ### namedQuery
 
-Named queries allow you to put your sql in a file and pass named parameters as javascript objects. Named query uses 'render()', see below.
+Named queries allow you to put your sql in a file and pass named parameters as javascript objects. Named query uses `render(...)`, see below.
 
 Assuming you have a file in `sql/test-query.sql`:
 ```sql
@@ -335,16 +335,15 @@ const { rows } = await pg.namedQuery('test-query', { colName: 'bar', tableName: 
 
 The parameters are escaped both for correctness and to prevent sql injection. [node-pg-format](https://github.com/datalanche/node-pg-format) is used to do the escaping under the hood. Here's a quick rundown of the syntax:
 
-- `%L` a value (for example: `WHERE name = %l`)
+- `%L` a value (for example: `WHERE name = %L`)
 - `%I` an identifier (for example `WHERE %I = 'hello'`)
 - `%s` a literal. Warning: no sql injection protection. (for example: `INSERT INTO table (col, col2) VALUES ( %s ))
 
 On top of this, Piggy allows you to name a variable, so you can pass a javascript object of values and have Piggy put them in the right place:
 
-```sql
--- assumed to be called 'test-query'
--- pg.render('SELECT %I:colName FROM %I:tableName WHERE foo = %L:fooVal;', { colName: 'bar', tableName: 'example_table', fooVal: 'baz' });
--- => SELECT "bar" FROM "example_table" WHERE foo = 'baz';
+```typescript
+pg.render('SELECT %I:colName FROM %I:tableName WHERE foo = %L:fooVal;', { colName: 'bar', tableName: 'example_table', fooVal: 'baz' });
+// => SELECT "bar" FROM "example_table" WHERE foo = 'baz';
 ```
 
 One gotcha at the time of writing is that it's unlikely formatting a query that contains text very similar to a template, but isn't supposed to be templated, will work properly. If you need to do this (unlikely), format and escape it yourself.
