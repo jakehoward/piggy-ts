@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "publish": "npm test; npm run build",
+    "do-publish": "npm run test; npm run build; npm publish --dry-run",
     "verify-publish-contents": "npm pack",
     "test": "NODE_ENV=test jest --runInBand --testMatch='**/*.test.ts'",
     "build": "tsc --build tsconfig.json",
