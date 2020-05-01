@@ -4,7 +4,7 @@ Convenience wrapper around the venerable node-postgres and marv, making it easie
 
 ## What is it and why would I use it?
 
-When you're creating an application and want to use postres, there are a sea of libraries and options out there. Postgres is a fantastic database, but it's not always easy to get up and running. Finding and using lower level libraries that are good at what they do is fiddly and requires a lot of research, using an ORM leads you away from the powerful SQL interface that allows you to get the most out of postgres and make your data a first class citizen in your application.
+When you're creating an application and want to use postgres, there are a sea of libraries and options out there. Postgres is a fantastic database, but it's not always easy to get up and running. Finding and using lower level libraries that are good at what they do is fiddly and requires a lot of research, using an ORM leads you away from the powerful SQL interface that allows you to get the most out of postgres and make your data a first class citizen in your application.
 
 Piggy isn't so much a library as a "prebuilt setup" that picks some libraries and offers an opinion on how they could be used.
 
@@ -154,7 +154,7 @@ Piggy wraps [marv](https://github.com/guidesmiths/marv), an excellent migration 
 You tell Piggy where the migration files are and it does the rest when you call `await pg.runDatabaseMigrations();`
 
 Config:
-- Path to migration files, optional in the config but migrations won't work without it.
+- Path to migration files, optional in the config, but migrations won't work without it.
 - `[optional]` Name for the migration table, (defaults to 'migrations' at the time of writing).
 - `[optional]` Separate connection details for the migration runner to use (perhaps it has more powerful credentials than the application). If not provided, the standard connection config is used.
 
@@ -211,7 +211,7 @@ If you're using an RDBMS there's a high chance you'll want to do something insid
 
 ```typescript
 await pg.withTransaction(async (conn) => {
-  const { rows } = await conn.query(`SELECT values from table`);
+  const { rows } = await conn.query(`SELECT values FROM table`);
   const updatedValues = doSomethingWithValues(rows);
 
   // Remember to return or await the promise.
