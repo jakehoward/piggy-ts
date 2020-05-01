@@ -18,7 +18,11 @@ The aim of Piggy is to provide a simple, useful tool for people who want to inte
 
 GitHub issues and pull requests are welcome. You're free to fork it, copy ideas from it and repackage it as your own without permission.
 
-## Quickstart - TypeScript
+## Quickstart
+
+```bash
+npm install --save piggy-ts
+```
 
 Start a postgres docker container:
 ```bash
@@ -30,6 +34,7 @@ docker run -d -p 54329:5432 \
     postgres:latest
 ```
 
+### Typescript
 Create an instance and run a query:
 ```typescript
 import { initPg, Pg, PgConfig } from 'piggy-ts';
@@ -68,6 +73,48 @@ async function run() {
 }
 
 run();
+```
+
+### Node
+
+```javascript 1.6
+const { initPg } = require('piggy-ts');
+
+const config = {
+  postgres: {
+    user: 'piggy',
+    host: 'localhost',
+    port: 54329,
+    database: 'piggy_db',
+    password: 'oink',
+  },
+  piggy: {},
+};
+
+const pg = initPg(config);
+
+async function run() {
+  // Make a table
+  await pg.query('DROP TABLE IF EXISTS farms');
+  await pg.query(`CREATE TABLE farms (name TEXT, food_quality_score INTEGER)`);
+
+  // Pop some data in it
+  await pg.query(`INSERT INTO farms (name, food_quality_score) VALUES ('Trotters Farm', 10)`);
+  await pg.query(`INSERT INTO farms (name, food_quality_score) VALUES ('Sty', 7)`);
+  await pg.query(`INSERT INTO farms (name, food_quality_score) VALUES ('Value Meats', 2)`);
+
+  // Get it back out again
+  const { rows } = await pg.query('SELECT name FROM farms WHERE food_quality_score > 5');
+
+  // ...and take a look at it
+  console.log(JSON.stringify(rows, null, 2));
+
+  // Don't forget to clean up
+  return pg.stop();
+}
+
+run();
+
 ```
 
 ## Debug
