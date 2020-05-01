@@ -1,2 +1,4 @@
-# piggy-ts
-Convenience wrapper around the venerable node-postgres and marv so that you can use Postgres effectively.
+# 🐷 piggy-ts
+
+Convenience wrapper around the venerable node-postgres and marv, making it easier to use Postgres effectively.
+

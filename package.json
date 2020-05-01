@@ -1,0 +1,35 @@
+{
+  "name": "piggy-ts",
+  "version": "0.0.1-pre-alpha",
+  "description": "Convenience wrapper around the venerable node-postgres and marv so that you can use Postgres effectively.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "publish": "npm test; npm run build",
+    "verify-publish-contents": "npm pack",
+    "test": "NODE_ENV=test jest",
+    "build": "node_modules/typescript/bin/tsc --build tsconfig.json",
+    "lint": "./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts' --fix",
+    "format": "node_modules/prettier/bin-prettier.js --write 'src/**/*.ts'",
+    "lint-format": "npm run lint && npm run format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakehoward/piggy-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakehoward/piggy-ts/issues"
+  },
+  "homepage": "https://github.com/jakehoward/piggy-ts#readme",
+  "devDependencies": {
+    "@types/node": "^13.13.4",
+    "@types/pg": "^7.14.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "pg": "^8.0.3"
+  }
+}
