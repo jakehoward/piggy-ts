@@ -337,7 +337,7 @@ The parameters are escaped both for correctness and to prevent sql injection. [n
 
 - `%L` a value (for example: `WHERE name = %L`)
 - `%I` an identifier (for example `WHERE %I = 'hello'`)
-- `%s` a literal. Warning: no sql injection protection. (for example: `INSERT INTO table (col, col2) VALUES ( %s ))
+- `%s` a literal. Warning: no sql injection protection. (for example: `INSERT INTO table (col, col2) VALUES ( %s )`)
 
 On top of this, Piggy allows you to name a variable, so you can pass a javascript object of values and have Piggy put them in the right place:
 
